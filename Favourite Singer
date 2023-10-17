@@ -1,0 +1,44 @@
+import java.util.*;
+
+public class TestClass {
+    public static void main(String args[]) {
+        // Create a Scanner object for reading input from the console
+        Scanner sc = new Scanner(System.in);
+        
+        // Read the number of songs as input (N)
+        long N = sc.nextLong(); // Number of songs
+        
+        // Create a HashMap to store the count of each singer
+        Map<Long, Long> singerCount = new HashMap<>();
+        
+        // Initialize a variable to keep track of the maximum frequency of any singer
+        long maxFrequency = 0;
+
+        // Loop through the input songs
+        for (long i = 0; i < N; i++) {
+            // Read the singer ID for the current song
+            long singer = sc.nextLong();
+            
+            // Update the count of the singer in the HashMap, if not found, initialize it to 0 and add 1
+            singerCount.put(singer, singerCount.getOrDefault(singer, 0L) + 1);
+            
+            // Update the maximum frequency if the current singer's count is greater
+            maxFrequency = Math.max(maxFrequency, singerCount.get(singer));
+        }
+
+        // Initialize a variable to store the count of favorite singers
+        long favoriteSingersCount = 0;
+
+        // Iterate through the unique singer IDs in the HashMap
+        for (long singer : singerCount.keySet()) {
+            // Check if the singer's count matches the maximum frequency
+            if (singerCount.get(singer) == maxFrequency) {
+                // If it does, increment the count of favorite singers
+                favoriteSingersCount++;
+            }
+        }
+
+        // Print the count of favorite singers to the console
+        System.out.println(favoriteSingersCount);
+    }
+}
